@@ -7,12 +7,14 @@ import Close from "../../public/Close.astro";
 import Buy from "../../public/Buy.astro";
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Echoes of Wisdom Countdown">
   <main>
     <div class="container">
       <div class="image">
-        <div class="cover"><img src="/cover.png" alt="" /></div>
-        <div class="hidden"><img src="/zelda.avif" alt="" /></div>
+        <div class="cover">
+          <img src="/cover.png" alt="Echoes of wisdom game coverS" />
+        </div>
+        <div class="hidden"><img src="/zelda.jpg" alt="Zelda Icon" /></div>
       </div>
 
       <div id="countdown">
@@ -44,11 +46,19 @@ import Buy from "../../public/Buy.astro";
       >
         <More />
       </div>
+      <p style="display: none;">
+        In The Legend of Zelda: Echoes of Wisdom, Princess Zelda takes the lead
+        to save Hyrule as strange rifts appear, stealing away its people. With
+        Link missing, Zelda teams up with a mysterious fairy name Tri and uses
+        the Tri Rod to create "echoes" of objects and enemies to solve puzzles
+        and defeat foes. THis game flips the classic formula , putting Zelda in
+        the hero's role to restore peace to the kingdom
+      </p>
     </div>
   </main>
   <div class="description">
     <Game />
-    <img id="zelda" src="/zelda.jpg" alt="" />
+    <img id="zelda" src="/zelda.jpg" alt="Zelda" />
     <div class="controls">
       <span id="buy">
         <a
