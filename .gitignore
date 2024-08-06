@@ -1,7 +1,5 @@
 # build output
 dist/
-
-# generated types
 .astro/
 
 # dependencies
@@ -20,5 +18,23 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-# jetbrains setting folder
+# JetBrains setting folder
 .idea/
+
+# Visual Studio Code settings
+.vscode/
+
+# Firebase cache
+.firebase/hosting.LmZpcmViYXNlXGVjaG9lcy1vZi13aXNkb20tY291bnRkb3duXGhvc3Rpbmc.cache
+
+# Firebase
+/.firebase
+
+#Github
+/.github
+
+# Astro build artifacts
+public/_astro/
+
+# Astro generated types
+src/env.d.ts
