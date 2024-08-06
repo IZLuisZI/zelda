@@ -2,8 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import More from "../../public/More.astro";
-
-const targetDate = Date.now() + 1034535234653246;
+import Game from "../../public/game.astro";
+import Close from "../../public/Close.astro";
+import Buy from "../../public/Buy.astro";
 ---
 
 <Layout title="Welcome to Astro.">
@@ -11,7 +12,7 @@ const targetDate = Date.now() + 1034535234653246;
     <div class="container">
       <div class="image">
         <div class="cover"><img src="/cover.png" alt="" /></div>
-        <div class="hidden"><img src="/public/zelda.avif" alt="" /></div>
+        <div class="hidden"><img src="/zelda.avif" alt="" /></div>
       </div>
 
       <div id="countdown">
@@ -45,9 +46,37 @@ const targetDate = Date.now() + 1034535234653246;
       </div>
     </div>
   </main>
+  <div class="description">
+    <Game />
+    <img id="zelda" src="/zelda.jpg" alt="" />
+    <div class="controls">
+      <span id="buy">
+        <a
+          href="https://www.nintendo.com/us/store/products/the-legend-of-zelda-echoes-of-wisdom-switch/"
+          target="_blank"
+        >
+          <Buy /></a
+        ></span
+      >
+      <span id="close"> <Close /></span>
+    </div>
+  </div>
 </Layout>
 
 <script>
+  const CloseButton = document.getElementById("close");
+  const moreButton = document.getElementById("more");
+
+  CloseButton.addEventListener("click", () => {
+    const description = document.querySelector(".description");
+    description.classList.toggle("expand");
+  });
+
+  moreButton.addEventListener("click", () => {
+    const description = document.querySelector(".description");
+    description.classList.toggle("expand");
+  });
+
   const date = new Date("2024-09-26T00:00:00Z");
   console.log(date);
   const targetDate = date.getTime();
@@ -87,10 +116,58 @@ const targetDate = Date.now() + 1034535234653246;
 </script>
 
 <style>
+  .expand {
+    transform: scale(1) translate(-50%, -50%) !important;
+  }
+  .controls span {
+    cursor: pointer;
+    width: 270px;
+  }
+  .controls {
+    display: flex;
+    gap: 1rem;
+    position: absolute;
+    bottom: 1rem;
+    right: 2rem;
+  }
+
+  .description {
+    transition: all 0.5s ease;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 550;
+    max-width: 100%;
+    width: 2000px;
+  }
+
+  #zelda {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 70%;
+    margin-left: 15rem;
+    margin-top: 10rem;
+  }
+
+  .description svg {
+    width: 100% !important;
+    height: auto;
+    aspect-ratio: auto 1 / 1;
+  }
+
+  img svg {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: auto 1 / 1;
+  }
+
   #more {
     cursor: pointer;
   }
-  #more:hover {
+  #more:hover,
+  .controls span:hover {
     box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
   }
   .cover {
@@ -108,7 +185,7 @@ const targetDate = Date.now() + 1034535234653246;
     transform: perspective(400px) rotatex(10deg) translateY(-5%) translateZ(0);
   }
   * {
-    transition: all 0.5s ease;
+    transition: all 0.5s ease !important;
   }
 
   .image {
@@ -128,6 +205,12 @@ const targetDate = Date.now() + 1034535234653246;
     opacity: 0;
     z-index: 5;
   }
+  @media screen and (width < 1560px) {
+    .controls span {
+      cursor: pointer;
+      width: 200px;
+    }
+  }
   @media screen and (width < 1000px) {
     main img {
       width: 400px !important;
@@ -139,8 +222,35 @@ const targetDate = Date.now() + 1034535234653246;
     #countdown p {
       font-size: 1rem !important;
     }
+
+    .controls span {
+      width: 120px;
+    }
   }
 
+  @media screen and (width < 1300px) {
+    #zelda {
+      margin-left: 10rem;
+      margin-top: 6rem;
+    }
+    .controls span {
+      cursor: pointer;
+      width: 170px;
+    }
+  }
+  @media screen and (width < 800px) {
+    #zelda {
+      margin-left: 5rem;
+      margin-top: 3rem;
+    }
+    .controls {
+      right: 1rem;
+      bottom: 0.5rem;
+    }
+    .controls span {
+      width: 80px;
+    }
+  }
   @media screen and (width < 600px) {
     main img {
       width: 300px !important;
@@ -149,8 +259,19 @@ const targetDate = Date.now() + 1034535234653246;
       font-size: 0.8rem;
     }
 
+    .controls {
+      right: 0.5rem;
+      bottom: 0.2rem;
+    }
+
     #countdown p {
       font-size: 0.8rem !important;
+    }
+  }
+  @media screen and (width < 450px) {
+    #zelda {
+      margin-left: 3rem;
+      margin-top: 2rem;
     }
   }
   #countdown {
