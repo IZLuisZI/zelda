@@ -1,0 +1,254 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import More from "../../public/More.astro";
+
+const targetDate = Date.now() + 1034535234653246;
+---
+
+<Layout title="Welcome to Astro.">
+  <main>
+    <div class="container">
+      <div class="image">
+        <div class="cover"><img src="/cover.png" alt="" /></div>
+        <div class="hidden"><img src="/public/zelda.avif" alt="" /></div>
+      </div>
+
+      <div id="countdown">
+        <span
+          style="display: flex ; flex-direction: column ; text-align: center;"
+        >
+          <span id="days"></span> <p>Days</p></span
+        >:
+        <span
+          style="display: flex ; flex-direction: column ; text-align: center;"
+        >
+          <span id="hours"></span>
+          <p>Hours</p>
+        </span>:
+        <span
+          style="display: flex ; flex-direction: column ; text-align: center;"
+        >
+          <span id="minutes"></span> <p>Minutes</p></span
+        > :
+        <span
+          style="display: flex ; flex-direction: column ; text-align: center;"
+        >
+          <span id="seconds"></span> <p>Seconds</p></span
+        >
+      </div>
+      <div
+        id="more"
+        style="display: flex; justify-content: center; font-size: x-large;"
+      >
+        <More />
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  const date = new Date("2024-09-26T00:00:00Z");
+  console.log(date);
+  const targetDate = date.getTime();
+  const countdown = document.getElementById("countdown");
+  const days = document.getElementById("days");
+  const hours = document.getElementById("hours");
+  const minutes = document.getElementById("minutes");
+  const seconds = document.getElementById("seconds");
+
+  function pad(value) {
+    return String(value).padStart(2, "0");
+  }
+
+  function updateCountdown() {
+    const timeLeft = targetDate - Date.now();
+    if (timeLeft <= 0) {
+      clearInterval(interval);
+      countdown.innerHTML = "It's here!";
+      return;
+    }
+
+    const daysLeft = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hoursLeft = Math.floor(
+      (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    const minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+    days.textContent = pad(daysLeft);
+    hours.textContent = pad(hoursLeft);
+    minutes.textContent = pad(minutesLeft);
+    seconds.textContent = pad(secondsLeft);
+  }
+
+  const interval = setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
+
+<style>
+  #more {
+    cursor: pointer;
+  }
+  #more:hover {
+    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+  }
+  .cover {
+    position: relative;
+  }
+
+  .image:hover .cover::before {
+    opacity: 1;
+  }
+  .image:hover .hidden {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .image:hover .cover img {
+    transform: perspective(400px) rotatex(10deg) translateY(-5%) translateZ(0);
+  }
+  * {
+    transition: all 0.5s ease;
+  }
+
+  .image {
+    position: relative;
+    width: fit-content;
+    padding: 0 1rem;
+    transition: all 0.5s ease;
+  }
+  .hidden {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    transform: translateY(25%);
+    transition: all 0.5s ease;
+    opacity: 0;
+    z-index: 5;
+  }
+  @media screen and (width < 1000px) {
+    main img {
+      width: 400px !important;
+    }
+    .container {
+      font-size: 1rem;
+    }
+
+    #countdown p {
+      font-size: 1rem !important;
+    }
+  }
+
+  @media screen and (width < 600px) {
+    main img {
+      width: 300px !important;
+    }
+    .container {
+      font-size: 0.8rem;
+    }
+
+    #countdown p {
+      font-size: 0.8rem !important;
+    }
+  }
+  #countdown {
+    display: flex;
+
+    margin-top: 1rem;
+  }
+  #countdown span {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  #countdown p {
+    font-size: 2rem;
+  }
+  main {
+    margin: auto;
+
+    max-width: calc(100% - 2rem);
+    color: white;
+
+    line-height: 1.6;
+    z-index: 20;
+  }
+  h1 {
+    margin: 0;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-size: 3rem;
+    font-weight: 700;
+  }
+  main img {
+    width: 400px;
+  }
+  img {
+    max-width: 100%;
+    aspect-ratio: auto 1 / 1;
+    border-radius: 8px;
+  }
+  #countdown {
+    display: flex;
+    gap: 0.9rem;
+    margin-top: 1rem;
+  }
+  .astro-a {
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    transform: translatex(-50%);
+    width: 220px;
+    height: auto;
+    z-index: -1;
+  }
+  h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .text-gradient {
+    background-image: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+  .instructions {
+    margin-bottom: 2rem;
+    border: 1px solid rgba(var(--accent-light), 25%);
+    background: linear-gradient(
+      rgba(var(--accent-dark), 66%),
+      rgba(var(--accent-dark), 33%)
+    );
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+  .instructions code {
+    font-size: 0.8em;
+    font-weight: bold;
+    background: rgba(var(--accent-light), 12%);
+    color: rgb(var(--accent-light));
+    border-radius: 4px;
+    padding: 0.3em 0.4em;
+  }
+  .instructions strong {
+    color: rgb(var(--accent-light));
+  }
+  .link-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+    gap: 2rem;
+    padding: 0;
+  }
+</style>
