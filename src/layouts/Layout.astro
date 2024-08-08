@@ -29,6 +29,10 @@ const { title } = Astro.props;
     <meta property="og:image" content="/triforce.webp" />
     <meta property="og:url" content="https://luissoriano.dev" />
     <meta property="og:type" content="website" />
+    <meta
+      name="google-site-verification"
+      content="Rm3n71sb7xr6Y1Zio13OlEL55cMnnV_QOmzc20EMfMI"
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
@@ -41,6 +45,7 @@ const { title } = Astro.props;
     <meta name="twitter:image" content="/path/to/your/image.jpg" />
     <meta name="twitter:site" content="@YourTwitterHandle" />
     <link rel="icon" type="image/svg+xml" href="/icon.webp" />
+    <meta name="robots" content="index, follow" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
@@ -86,7 +91,7 @@ const { title } = Astro.props;
     margin: 0;
     position: relative;
     padding: 0;
-    background: url("/background.jpg") no-repeat center center;
+    background: url("/background.webp") no-repeat center center;
     background-size: cover;
     display: grid;
     place-items: center;
